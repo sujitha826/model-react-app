@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<script type="text/javascript"
+        src="./node_modules/lightweight-charts/lightweight-charts.standalone.development.js"></script>-->
+    <title>Model App</title>
+</head>
+
+<body>
+    <div class="Container" id="Container">
+        <img src="images/image-url-for-testing.png" alt="Image cannot be displayed" width="500" height="300">
+        <button type="button" class="button" onclick="sendData()"><strong>Click Me!</strong></button>
+        <!--On clicking button, pass data from iframe to component(app)-->
+        <h3><span id="myText"></span></h3>
+    </div>
+</body>
+
+<script>
+
+    // receive data passed from component to iFrame!!
+    function getData(dataObj) {
+        if (dataObj) {
+            window.dataObj = dataObj;
+            console.log("Data passed from component to Iframe:", dataObj);
+            document.getElementById("myText").innerHTML = dataObj.data;
+        }
+        else {
+            window.dataObj = {};
+        }
+    }
+
+    function sendData() {
+        let msgObject = {
+            id: 'sendData',
+            data: {
+                'body': 'Data passed from iFrame to Site/app'
+            }
+        }
+        if (window.parent && msgObject) {
+            //  window.parent.postMessage(JSON.stringify(msgObject), "*");  // this can be used if iFrame and component are running in different origins( to send data to component)
+            window.parent.compMethod(msgObject);                    // if both source and target are running on the same origin
+        }
+    }
+
+    window.getData = getData;
+    window.setChart = setChart;
+
+</script>
+
+<style type="text/css">
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .Container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .button {
+        background-color: #19c5ba;
+        width: fit-content;
+        border-radius: 12px;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        opacity: 0.6;
+        cursor: pointer;
+        margin: 10px;
+    }
+</style>
+
+</html>

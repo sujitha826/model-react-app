@@ -1,0 +1,35 @@
+.file-list {
+    padding: 0 0;
+}
+
+li {
+    list-style: none;
+    background-color: #f55e3038;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2em 1.5em;
+}
+
+li svg {
+    color: #f55321;
+}
+
+li p {
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.actions {
+    cursor: pointer;
+    flex: 1;
+    margin-left: 120px;
+}
+
+.download-file {
+    color: #f55321;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 150px;
+}
